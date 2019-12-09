@@ -1,1 +1,1 @@
-# base del proyecto para el club de teares
+# base del proyecto para el club de tareas
