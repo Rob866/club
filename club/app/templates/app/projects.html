@@ -2,9 +2,83 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
+
 <section class="ftco-section ftco-project bg-light" id="projects-section">
   <div class="container px-md-5">
-    <div class="row justify-content-center pb-5">
+    <!--Table-->
+    <div class="input-group md-form form-sm form-2 pl-0">
+      <input class="form-control my-0 py-1 red-border" type="text" placeholder="Búsqueda" aria-label="Search">
+      <div class="input-group-append">
+        <span class="input-group-text red lighten-3" id="basic-text1">
+        <svg class="bi bi-chevron-right" width="32" height="32" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z" clip-rule="evenodd"/></svg>
+        </span>
+      </div>
+
+<table id="tablePreview" class="table mt-5">
+<!--Table head-->
+<thead style="border: 1px solid #e6e6fa">
+  <tr>
+    <th>#</th>
+    <th>Nombre(s)</th>
+    <th>apellidos</th>
+    <th>Nivel Académico</th>
+  </tr>
+</thead>
+<!--Table head-->
+<!--Table body-->
+<tbody style="border :1px solid #E6E6FA">
+  {% for alumno in alumnos %}
+  <tr>
+    <th scope="row">+</th>
+    <td>{{ alumno.nombre }}</td>
+    <td>{{ alumno.apellido }}</td>
+    {% if alumno.nivel_academico == "k"%}
+    <td>Kinder</td>
+    {% elif alumno.nivel_academico == "p"%}
+    <td>Primaria</td>
+    {% elif alumno.nivel_academico == "s"%}
+    <td>Secundaria</td>
+    {% elif alumno.nivel_academico == "b"%}
+    <td>Preparatoria</td>
+    {% elif alumno.nivel_academico == "u"%}
+    <td>universidad</td>
+    {%endif%}
+  </tr>
+  {% endfor %}
+</tbody>
+<!--Table body-->
+</table>
+<!--Table-->
+
+      <!--<ul>
+      {% for alumno  in alumnos %}
+      <li>
+        Nombre del Alumno: {{ alumno.nombre}}   {{ alumno.apellido }}
+        <br>
+        {% for paquete  in alumno.paquete_inscrito_set.all %}
+            <br>
+            Fecha de Inscripcion: {{ paquete.fecha_de_inscripcion }}
+            <br>
+            Tipo de paquete: {{ paquete.tipo_de_paquete}}
+            //Horas consumidas: {{ paquete.horas_consumidas }} hora(s)
+            {% if paquete.status %}
+             	<p>Status Activo </p>
+             {% else %}
+    	      <p>status Finalizado</p>
+            {% endif %}
+            <p>Clases Concluidas</p>
+            {% for clase in paquete.sesiones.all %}
+            <br>
+             <li>
+             Asignatura: {{ clase.asignatura }}:Tiempo de sesion: <span>:{{ clase.tiempo_de_sesion }}</span> Hora(s)
+             </li>
+            {% endfor %}
+        {% endfor %}
+      </li>
+      {% endfor %}
+      </ul>
+
+     <div class="row justify-content-center pb-5">
       <div class="col-md-12 heading-section text-center ftco-animate">
         <span class="subheading">Accomplishments</span>
         <h2 class="mb-4">Our Projects</h2>
@@ -82,9 +156,10 @@
           </div>
         </div>
       </div>
-    </div>
+
+  </div>
+  -->
   </div>
 </section>
-
 
 {% endblock content     %}
