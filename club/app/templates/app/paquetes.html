@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="ftco-section ftco-project bg-light">
+
+		<div class="container px-md-5">
+				<h3 style="text-transform: uppercase">Alumno: {{ student.nombre }} {{ student.apellido}}</h3>
+
+				<ul class="list-group">
+					{% for paquete in paquetes %}
+					 <li class="list-group-item active"> Tipo de paquete: {{ paquete.tipo_de_paquete }}</li>
+					 <li class="list-group-item"> Horas consumidas: {{ paquete.horas_consumidas }} Hrs</li>
+					 <li class="list-group-item"> Fecha de Inscripcion: {{ paquete.fecha_de_inscripcion }}</li>
+					 {% if paquete.status%}
+					 <li class="list-group-item">Status: Activo</li>
+					 {% else %}
+					 <li class="list-group-item" >Status: Inactivo</li>
+					 {% endif%}
+					 <li class="list-group-item mb-5">
+						 <a href="{% url 'app:clases' student_id=student.id paquete_id=paquete.id %}">
+				     <button type="button" class="btn btn-info">Ver Clases </button>
+				     </a>
+					 </li>
+					{% endfor %}
+				</ul>
+		</div>
+
+</section>
+
+{% endblock content     %}

@@ -1,4 +1,3 @@
-
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
@@ -10,40 +9,45 @@
       <input class="form-control my-0 py-1 red-border" type="text" placeholder="Búsqueda" aria-label="Search">
       <div class="input-group-append">
         <span class="input-group-text red lighten-3" id="basic-text1">
-        <svg class="bi bi-chevron-right" width="32" height="32" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z" clip-rule="evenodd"/></svg>
-        </span>
+        <i class="fa fa-search" style="font-size:25px"></i>
       </div>
 
-<table id="tablePreview" class="table mt-5">
+<table class="table table-hover mt-5">
 <!--Table head-->
-<thead style="border: 1px solid #e6e6fa">
+<thead>
   <tr>
-    <th>#</th>
-    <th>Nombre(s)</th>
-    <th>apellidos</th>
-    <th>Nivel Académico</th>
+    <!--<th scope="col">#</th>-->
+    <th scope="col">Nombre(s)</th>
+    <th scope="col">apellidos</th>
+    <!--<th scope="col">Nivel Académico</th>-->
+    <th scope="col">Detalles</th>
   </tr>
 </thead>
 <!--Table head-->
 <!--Table body-->
-<tbody style="border :1px solid #E6E6FA">
+<tbody>
   {% for alumno in alumnos %}
-  <tr>
-    <th scope="row">+</th>
-    <td>{{ alumno.nombre }}</td>
-    <td>{{ alumno.apellido }}</td>
-    {% if alumno.nivel_academico == "k"%}
-    <td>Kinder</td>
-    {% elif alumno.nivel_academico == "p"%}
-    <td>Primaria</td>
-    {% elif alumno.nivel_academico == "s"%}
-    <td>Secundaria</td>
-    {% elif alumno.nivel_academico == "b"%}
-    <td>Preparatoria</td>
-    {% elif alumno.nivel_academico == "u"%}
-    <td>universidad</td>
-    {%endif%}
-  </tr>
+   <tr>
+     <!--<th scope="row"><i style="font-size: 25px" class="fa fa-user"></i></th>-->
+     <td>{{ alumno.nombre }}</td>
+     <td>{{ alumno.apellido }}</td>
+    <!--
+     {% if alumno.nivel_academico == "k"%}
+     <td>Kinder</td>
+     {% elif alumno.nivel_academico == "p"%}
+     <td>Primaria</td>
+     {% elif alumno.nivel_academico == "s"%}
+     <td>Secundaria</td>
+     {% elif alumno.nivel_academico == "b"%}
+     <td>Preparatoria</td>
+     {% elif alumno.nivel_academico == "u"%}
+     <td>universidad</td>
+     {%endif%}
+     -->
+     <td><a href="{% url 'app:paquetes' id=alumno.id %}">
+     <button type="button" class="btn btn-info">Ver</button>
+     </a></td>
+   </tr>
   {% endfor %}
 </tbody>
 <!--Table body-->

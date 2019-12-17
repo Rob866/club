@@ -38,6 +38,7 @@ class Tipo_de_Paquete(models.Model):
 
 
 class Alumno(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="id del Alumno")
     nombre =  models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     NIVEL_STATUS = (
