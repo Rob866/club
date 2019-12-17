@@ -4,7 +4,13 @@
 
 <section class="ftco-section ftco-project bg-light" id="projects-section">
   <div class="container px-md-5">
-   <h3>testing mi app</h3>
+   <h3 style="text-transform: uppercase">Alumno:  {{ student.nombre }} {{ student.apellido }}(Paquete {{ paquete.tipo_de_paquete }})</h3>
+   <ul class="list-group">
+     {% for clase in clases %}
+
+     <li class="list-group-item">Asignatura: {{ clase.asignatura }}: Tiempo de sesion {{ clase.tiempo_de_sesion}}Hrs</li>
+     {% endfor%}
+   </ul>
 
   </div>
 </section>

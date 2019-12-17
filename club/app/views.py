@@ -38,7 +38,8 @@ def clases(request,student_id,paquete_id):
 
     context = {
         'student':student,
-        'clases': clases
+        'clases': clases,
+        'paquete':paquete
          }
     return render(request,'app/clases.html',context)
 
