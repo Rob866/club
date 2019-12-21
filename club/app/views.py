@@ -1,6 +1,18 @@
 from django.shortcuts import render
 from .models import  Alumno
 from .models import Paquete_Inscrito
+from .models import Post
+from django.db.models import Q
+from django.templatetags.static import static
+from django.conf import settings
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+
 # Create your views here.
 def home(request):
     return render(request, 'app/home.html')
@@ -11,11 +23,34 @@ def about(request):
 def services(request):
     return render(request, 'app/services.html')
 
-def alumnos(request):
+def blog(request):
+    posts = Post.objects.filter(status=1).order_by('-create_on')
     context= {
-    'alumnos': Alumno.objects.all()
+    'posts': posts
     }
-    return render(request, 'app/alumnos.html',context)
+    return render(request,'app/blog.html',context)
+
+def postDetail(request,id):
+    post = Post.objects.all().get(id=id)
+    context = {
+    'post': post
+    }
+    return render(request,'app/detail_post.html',context)
+
+class AlumnosListView(ListView):
+    model = Alumno
+    template_name= 'app/alumnos.html'
+    context_object_name = 'alumnos'
+    ordering =['-apellido']
+    paginate_by= 10
+
+    def get_queryset(self):
+        if 'busqueda' in self.request.GET:
+            query = self.request.GET.get('busqueda')
+            if query:
+                return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query))
+        return Alumno.objects.all().order_by('apellido')
+
 
 def paquetes(request,id):
     student = Alumno.objects.all().get(id=id)
@@ -26,7 +61,6 @@ def paquetes(request,id):
     'student' : student,
     'paquetes': paquetes
     }
-    print(context)
     return render(request,'app/paquetes.html',context)
 
 def clases(request,student_id,paquete_id):

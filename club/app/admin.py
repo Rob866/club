@@ -10,8 +10,14 @@ from admin_auto_filters.filters import AutocompleteFilter
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 import  import_export
-
+from .models import Post
 # Register your models here
+
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('titulo','status','create_on')
+    search_fields =['titulo','contenido']
+
 class SesionAdmin(admin.ModelAdmin):
     list_display =('paquete_inscrito_','tiempo_de_inicio','tiempo_de_salida','tiempo_de_sesion',)
     list_filter = [('paquete_inscrito',admin.RelatedFieldListFilter)]
@@ -130,3 +136,4 @@ admin.site.register(Sesion,SesionAdmin)
 admin.site.register(Paquete_Inscrito,Paquete_InscritoAdmin)
 admin.site.register(Tipo_de_Paquete)
 admin.site.register(LogEntry,LogEntryAdmin)
+admin.site.register(Post,PostAdmin)

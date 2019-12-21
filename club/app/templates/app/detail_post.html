@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb">
+  <div class="container" style="margin-top:100px">
+    		<div class="row d-flex">
+<article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                Creado por: <a class="mr-2" href="#">{{ post.autor}}</a>
+                <small class="text-muted">{{ post.create_on }} Hrs</small>
+            </div>
+            <h3>{{ post.titulo }}</h3>
+
+            {% if post.imagen %}
+                     <img src="{{ post.imagen.url }}" class="img-fluid" alt="Responsive image"
+                        style="margin-bottom : 10px">
+            {% endif %}
+
+            <p class="article-content">{{post.content}}</p>
+             <a class="btn btn-outline-info mb-4" href="{% url 'app:blog' %}">ir a Blog</a>
+        </div>
+  </article>
+  </div>
+</div>
+</section>
+{%endblock content%}
