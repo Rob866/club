@@ -1,3 +1,14 @@
+function myFunction() {
+  var x = document.getElementById("box");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    document.getElementById("togle").innerHTML = "Ocultar formulario";
+  } else {
+    x.style.display = "none";
+    document.getElementById("togle").innerHTML = "Agregar comentario"; 
+  }
+}
+
  AOS.init({
  	duration: 800,
  	easing: 'slide'

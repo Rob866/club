@@ -53,7 +53,7 @@
                       <h3 class="heading"><a href="single.html">{{ post.titulo}}</a></h3>
                       <p>{{post.content|truncatewords:10|linebreaks}}</p>
                       <div class="d-flex align-items-center mt-4 meta">
-      	                <p class="mb-0"> <a href="{% url 'app:post_detail' id=post.id %}" class="btn btn-primary">Leer mas <span class="ion-ios-arrow-round-forward"></span></a></p>
+      	                <p class="mb-0"> <a href="{% url 'blog:post_detail' id=post.id %}" class="btn btn-primary">Leer mas <span class="ion-ios-arrow-round-forward"></span></a></p>
       	                <p class="ml-auto mb-0">
       	                	<a href="#" class="mr-2">{{post.autor}}</a>
       	                	<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>

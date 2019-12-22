@@ -15,9 +15,9 @@
 				<ul class="list-group">
 					{% for paquete in paquetes %}
 					 {% if paquete.status %}
-					 <li class="list-group-item " style="background-color: #3cb371;color:white"> Tipo de paquete: {{ paquete.tipo_de_paquete }}</li>
+					 <li class="list-group-item" style="background-color: #3cb371;color:white"> Tipo de paquete: {{ paquete.tipo_de_paquete }}</li>
 					 {%else%}
-					 <li class="list-group-item " style="background-color: #de2d29;color: white"> Tipo de paquete: {{ paquete.tipo_de_paquete }}</li>
+					 <li class="list-group-item" style="background-color: #de2d29;color: white"> Tipo de paquete: {{ paquete.tipo_de_paquete }}</li>
 					 {% endif%}
 
 					 <li class="list-group-item"> Horas consumidas: {{ paquete.horas_consumidas }} Hrs</li>

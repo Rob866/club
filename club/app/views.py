@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import  Alumno
 from .models import Paquete_Inscrito
-from .models import Post
 from django.db.models import Q
 from django.templatetags.static import static
 from django.conf import settings
@@ -23,19 +22,6 @@ def about(request):
 def services(request):
     return render(request, 'app/services.html')
 
-def blog(request):
-    posts = Post.objects.filter(status=1).order_by('-create_on')
-    context= {
-    'posts': posts
-    }
-    return render(request,'app/blog.html',context)
-
-def postDetail(request,id):
-    post = Post.objects.all().get(id=id)
-    context = {
-    'post': post
-    }
-    return render(request,'app/detail_post.html',context)
 
 class AlumnosListView(ListView):
     model = Alumno

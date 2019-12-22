@@ -4,25 +4,6 @@ import datetime
 from django.contrib.auth.models import  User
  # name of the foreign key field
 
-class Post(models.Model):
-    STATUS = (
-    (0,'borrador'),
-    (1,'publicado')
-    )
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="id del Post")
-    titulo = models.CharField(max_length=200,unique=True)
-    autor = models.ForeignKey(User,on_delete=models.CASCADE,related_name='blog_posts')
-    update_on= models.DateTimeField(auto_now=True)
-    imagen = models.ImageField(upload_to='post_image/%Y/%m/%d',blank=True)
-    content = models.TextField()
-    create_on = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=STATUS,default=0)
-
-    class Meta:
-        ordering = ['-create_on']
-
-    def __str__(self):
-        return self.titulo
 
 class Sesion(models.Model):
     paquete_inscrito = models.ForeignKey('Paquete_Inscrito',related_name="sesiones",on_delete=models.CASCADE,null=True)

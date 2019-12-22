@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'blog.apps.BlogConfig',
     'admin_auto_filters',
-    'import_export'
+    'import_export',
+    'crispy_forms',
 ]
 SITE_ID = 1
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -125,7 +127,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL= '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'app/media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'blog/media')
 #STATICFILES_DIRS = [
 #    os.path.join(BASE_DIR, 'static'),
 #]

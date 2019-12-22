@@ -25,6 +25,7 @@ admin.site.index_title = "Bienvenido al Club de tareas Admin"
 
 urlpatterns = [
     path('', include('app.urls')),
+    path('',include('blog.urls')),
     path('admin/', admin.site.urls),
 ]
 
