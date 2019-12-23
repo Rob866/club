@@ -1,80 +1,160 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load embed_video_tags %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="container">
+<div class="row" style="margin-top:100px;padding:0;margin-left:0;margin-right:0">
+  <div class="col-12 col-md-8">
+      <section class="ftco-counter img ftco-section ftco-no-pt ftco-no-p">
 
-<section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb">
-  <div class="container" style="margin-top:100px">
-    		<div class="row d-flex">
-<article class="media content-section">
-        <div class="media-body">
-            <div class="article-metadata">
-                Creado por: <a class="mr-2" href="#">{{ post.autor}}</a>
-                <small class="text-muted">{{ post.create_on }} Hrs</small>
-            </div>
-            <h3>{{ post.titulo }}</h3>
+            <article class="media content-section">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            Creado por: <a class="mr-2" href="#">{{ post.autor}}</a>
+                            <small class="text-muted">{{ post.create_on }} Hrs</small>
+                        </div>
+                        <h3>{{ post.titulo }}</h3>
+                        {% if post.imagen %}
+                                 <img src="{{ post.imagen.url }}" class="img-fluid" alt="Responsive image"
+                                    style="margin-bottom : 10px">
+                        {% endif %}
+                        <p class="article-content" style="text-align: justify">{{post.content}}</p>
 
-            {% if post.imagen %}
-                     <img src="{{ post.imagen.url }}" class="img-fluid" alt="Responsive image"
-                        style="margin-bottom : 10px">
-            {% endif %}
 
-            <p class="article-content">{{post.content}}</p>
-             <a class="btn btn-outline-info mb-4" href="{% url 'blog:blog' %}">ir a Blog</a>
-        </div>
-  </article>
+                        {% video post.video as my_video %}
+                              <div style="position:relative; width: 100%; overflow: hidden ;padding-top: 56.25%;">
+                              {% video my_video %}
+                              </div>
+                          {% endvideo %}
+                    </div>
+              </article>
+               <a class="btn btn-outline-info mb-4" style="margin-top: 10px" href="{% url 'blog:blog' %}">ir a Blog</a>
+      </section>
   </div>
-  <!-- Comments Form -->
-  <h2>Sistema de comentarios</h2>
-  <div class="container">
-            <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
-              <form id="box" method="post" style="display:none; margin-bottom: 20px;">
-                  {{ comment_form | crispy }}
-                  {% csrf_token %}
-                  <button  class="btn btn-outline-info mb-4" type="submit">enviar</button>
-              </form>
-            </div>
-</div>
-</div>
+  <div class="col-12 col-md-4">
+      <div class="content-section">
+                 <h3>RANDOM BLOG</h3>
+                 <p class='text-muted'>Un poco acerca de mi Blog
+                   <ul class="list-group">
+                     <li class="list-group-item list-group-item-light">numero de posts :23 </li>
+                   </ul>
+                 </p>
+                   <p class="text-muted">Ultimos post :
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">
+                            <a href="">Primer post</a>
+                        </li>
+                      </ul>
+                   </p>
 
-  <button id="togle" class="btn btn-outline-info mb-4"onclick="myFunction()" type="button" name="button">agregar comentario</button>
+                     <p class="text-muted">Post mas comentados :
+                      <ul class="list-group">
 
-  <!-- Comment with nested comments -->
-  {% for comment in comentarios %}
-      <div class="comment" style="margin-bottom: 20px">
-          <p class="info">{{ comment.nombre }} | {{ comment.created_on }}</p>
-              {{ comment.body|linebreaks }}
+                           <li class="list-group-item list-group-item-light">
+                               <a href="{{ ">Segungo Post</a>
+                           </li>
+                           <li class="list-group-item list-group-item-light">
+                               <a href="">Segungo Post</a>
+                           </li>
+                           <li class="list-group-item list-group-item-light">
+                               <a href="">Segungo Post</a>
+                           </li>
 
-            <ul class="list-group">
-          {% for replay in comment.replies.all %}
-             <li class="list-group-item" >
-              <p class="info">{{ replay.nombre }} | {{ replay.created_on }}</p>
-              <p>{{ replay.body }}</p>
-              </li>
-          {% endfor %}
-          </ul>
 
-        <h3>Contestar:</h3>
-        <div class="container">
-                  <div class="row justify-content-center">
-                  <div class="col-12 col-md-8">
-                    <form method="POST" style="padding:10px;">
-                        {{ comment_form | crispy }}
-                        {% csrf_token %}
-                        <!-- Hidden input for parent comment.id -->
-                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                        <input class="btn btn-outline-info mb-4"  type="submit" value="Replay">
-                    </form>
-       </div>
-     </div>
-   </div>
+                      </ul>
+                     </p>
       </div>
-  {% empty %}
-  <h4>There are no comments yet.</h4>
-  {% endfor %}
-
+  </div>
+</div>
 </div>
 
-</section>
+<div class="container">
+  <div class="row" style="margin:0; padding:0;">
+    <div class="col-md-8">
+      <h2>Sistema de comentarios</h2>
+      <div class="row" style="padding:0; margin:0">
+                <div class="col-12 col-md-8">
+                  <form id="box" method="post" style="display:none; margin-bottom: 20px">
+                      {{ comment_form | crispy }}
+                      {% csrf_token %}
+                      <button  class="btn btn-outline-info mb-4" type="submit">enviar</button>
+                  </form>
+                </div>
+      </div>
+
+      <button id="togle" class="btn btn-outline-info mb-4"onclick="myFunction()" type="button" name="button">agregar comentario</button>
+      <!-- Comment with nested comments -->
+      {% for comment in comentarios %}
+          <div class="comment" style="margin-bottom: 20px">
+              <ul class="list-group">
+              <li class="list-group-item" style="margin-bottom:1px"><p class="info">{{ comment.nombre }} | {{ comment.created_on }}
+                  {{ comment.body|linebreaks }} </p></li>
+
+              {% for replay in comment.replies.all %}
+                 <li class="list-group-item" >
+                  <p class="info">{{ replay.nombre }} | {{ replay.created_on }}</p>
+                  <p>{{ replay.body }}</p>
+                  </li>
+              {% endfor %}
+              </ul>
+
+            <div class="container content-section" id="{{ comment.id }}"  style="display: none">
+                      <div class="row justify-content-center">
+                      <div class="col-12 col-md-8">
+                        <form method="POST">
+                            {{ comment_form | crispy }}
+                            {% csrf_token %}
+                            <!-- Hidden input for parent comment.id -->
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <input class="btn btn-outline-info mb-4"  type="submit" value="Contestar">
+                        </form>
+           </div>
+         </div>
+       </div>
+                  <button id="{{ comment.id }}w" style ="margin-top: 10px" onclick="myFunction2('{{comment.id}}','{{comment.id}}w')" class="btn btn-outline-info mb-4" type="button" name="button">Contestar</button>
+          </div>
+      {% empty %}
+      <h4>Aun no hay comentarios.</h4>
+      {% endfor %}
+
+
+    </div>
+    <div class="col-md-4">
+        <div class="content-section">
+                   <h3>RANDOM BLOG</h3>
+                   <p class='text-muted'>Un poco acerca de mi Blog
+                     <ul class="list-group">
+                       <li class="list-group-item list-group-item-light">numero de posts :23 </li>
+                     </ul>
+                   </p>
+                     <p class="text-muted">Ultimos post :
+                        <ul class="list-group">
+                          <li class="list-group-item list-group-item-light">
+                              <a href="">Primer post</a>
+                          </li>
+                        </ul>
+                     </p>
+
+                       <p class="text-muted">Post mas comentados :
+                        <ul class="list-group">
+
+                             <li class="list-group-item list-group-item-light">
+                                 <a href="{{ ">Segungo Post</a>
+                             </li>
+                             <li class="list-group-item list-group-item-light">
+                                 <a href="">Segungo Post</a>
+                             </li>
+                             <li class="list-group-item list-group-item-light">
+                                 <a href="">Segungo Post</a>
+                             </li>
+
+
+                        </ul>
+                       </p>
+        </div>
+    </div>
+  </div>
+
+</div>
 {%endblock content%}

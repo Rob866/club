@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from .models import Post,Comentario
 from .forms import CommentForm
+import uuid
 from django.http import HttpResponseRedirect
 def blog(request):
     posts = Post.objects.filter(status=1).order_by('-create_on')
