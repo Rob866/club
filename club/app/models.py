@@ -30,7 +30,6 @@ class Sesion(models.Model):
 class Tipo_de_Paquete(models.Model):
     horas = models.IntegerField(default=1)
 
-
     class Meta:
         verbose_name = ("Tipo de Paquete")
         verbose_name_plural = ("Tipos de Paquetes")

@@ -5,6 +5,7 @@ from django.urls import reverse
 from embed_video.fields import EmbedVideoField
 # Create your models here.
 
+
 class Post(models.Model):
     STATUS = (
     (0,'borrador'),
@@ -45,3 +46,16 @@ class Comentario(models.Model):
 
     def __str__(self):
         return 'Comentario de:{}'.format( self.nombre)
+
+class Mensaje(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="id del mensaje")
+    nombre = models.CharField(max_length=80)
+    asunto = models.CharField(max_length=80)
+    email = models.EmailField()
+    body= models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_on']
+    def __str__(self):
+        return self.nombre

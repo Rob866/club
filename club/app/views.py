@@ -11,7 +11,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-
+from django.http import HttpResponseRedirect
 # Create your views here.
 def home(request):
     return render(request, 'app/home.html')
@@ -24,19 +24,15 @@ def services(request):
 
 
 class AlumnosListView(ListView):
-    model = Alumno
     template_name= 'app/alumnos.html'
     context_object_name = 'alumnos'
-    ordering =['-apellido']
-    paginate_by= 10
 
     def get_queryset(self):
         if 'busqueda' in self.request.GET:
             query = self.request.GET.get('busqueda')
             if query:
-                return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query))
-        return Alumno.objects.all().order_by('apellido')
-
+                return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query)).order_by('apellido')
+        return  None
 
 def paquetes(request,id):
     student = Alumno.objects.all().get(id=id)
@@ -65,6 +61,3 @@ def clases(request,student_id,paquete_id):
 
 def testimony(request):
     return render(request, 'app/testimony.html')
-
-def contact(request):
-    return render(request,'app/contact.html')

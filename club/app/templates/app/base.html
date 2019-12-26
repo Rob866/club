@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{% static 'app/css/icomoon.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
-
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v5.0"></script>
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
@@ -43,7 +43,7 @@
               <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link"><span>Blog</span></a></li>
 	          <li class="nav-item"><a href="{% url 'app:alumnos' %}"  class="nav-link"><span>Alumnos</span></a></li>
 	       <!--   <li class="nav-item"><a href="#blog-section" class="nav-link"><span>Blog</span></a></li>-->
-	          <li class="nav-item"><a href="{% url 'app:contact' %}"  class="nav-link"><span>Contacto</span></a></li>
+	          <li class="nav-item"><a href="{% url 'blog:contact' %}"  class="nav-link"><span>Contacto</span></a></li>
 	        </ul>
 	      </div>
 	    </div>

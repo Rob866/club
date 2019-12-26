@@ -5,7 +5,9 @@
 <section class="ftco-section ftco-project bg-light">
 
 		<div class="container px-md-5">
-				<h3 style="text-transform: uppercase">Alumno: {{ student.nombre }} {{ student.apellido}}</h3>
+				<p style="text-transform: uppercase; font-size: 25px">
+					Historial de  Paquetes suscritos del  Alumno: {{ student.nombre }} {{ student.apellido}}
+				</p>
 				<button type="button" class="btn btn-primary btn-circle">
 				</button> <span>Paquete Activo</span><br>
 				<button type="button" class="btn btn-danger btn-circle">
@@ -25,7 +27,7 @@
 					 {% if paquete.status%}
 					 <li class="list-group-item">Status: Activo</li>
 					 {% else %}
-					 <li class="list-group-item" >Status: Inactivo</li>
+					 <li class="list-group-item" >Status: Culminado</li>
 					 {% endif%}
 					 <li class="list-group-item mb-5">
 						 <a href="{% url 'app:clases' student_id=student.id paquete_id=paquete.id %}">

@@ -21,12 +21,13 @@
                         {% endif %}
                         <p class="article-content" style="text-align: justify">{{post.content}}</p>
 
-
+                       {% if post.video %}
                         {% video post.video as my_video %}
                               <div style="position:relative; width: 100%; overflow: hidden ;padding-top: 56.25%;">
                               {% video my_video %}
                               </div>
                           {% endvideo %}
+                       {% endif %}
                     </div>
               </article>
                <a class="btn btn-outline-info mb-4" style="margin-top: 10px" href="{% url 'blog:blog' %}">ir a Blog</a>
@@ -34,16 +35,16 @@
   </div>
   <div class="col-12 col-md-4">
       <div class="content-section">
-                 <h3>RANDOM BLOG</h3>
-                 <p class='text-muted'>Un poco acerca de mi Blog
+                 <p>
+                 <a class="navbar-brand" href="index.html"><span style="color: black">Club de </span><span>Tareas</span></a>
                    <ul class="list-group">
-                     <li class="list-group-item list-group-item-light">numero de posts :23 </li>
+                     <li class="list-group-item list-group-item-light">numero de  posts: {{ posts | length }} </li>
                    </ul>
                  </p>
-                   <p class="text-muted">Ultimos post :
+                   <p class="text-muted">Post anterior :
                       <ul class="list-group">
                         <li class="list-group-item list-group-item-light">
-                            <a href="">Primer post</a>
+                            <a href="{{ post_anterior.get_absolute_url }}">{{ post_anterior.titulo}}</a>
                         </li>
                       </ul>
                    </p>
@@ -52,38 +53,36 @@
                       <ul class="list-group">
 
                            <li class="list-group-item list-group-item-light">
-                               <a href="{{ ">Segungo Post</a>
-                           </li>
-                           <li class="list-group-item list-group-item-light">
                                <a href="">Segungo Post</a>
                            </li>
                            <li class="list-group-item list-group-item-light">
                                <a href="">Segungo Post</a>
                            </li>
-
-
+                           <li class="list-group-item list-group-item-light">
+                               <a href="">Segungo Post</a>
+                           </li>
                       </ul>
                      </p>
       </div>
   </div>
 </div>
 </div>
-
 <div class="container">
   <div class="row" style="margin:0; padding:0;">
     <div class="col-md-8">
-      <h2>Sistema de comentarios</h2>
+      <div class="fb-like" data-href="https://192.168.0.7:8000/blog/{{post.id}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+        <div class="fb-comments" data-href="https://192.168.0.7:8000/blog/{{post.id}}" data-width="500px" data-numposts="5"></div>
       <div class="row" style="padding:0; margin:0">
                 <div class="col-12 col-md-8">
-                  <form id="box" method="post" style="display:none; margin-bottom: 20px">
+                  <form id="box" method="post" margin-bottom: 20px">
                       {{ comment_form | crispy }}
                       {% csrf_token %}
-                      <button  class="btn btn-outline-info mb-4" type="submit">enviar</button>
+                      <button  class="btn btn-outline-info mb-4" type="submit">Agregar comentario</button>
                   </form>
                 </div>
       </div>
 
-      <button id="togle" class="btn btn-outline-info mb-4"onclick="myFunction()" type="button" name="button">agregar comentario</button>
+      <!--button id="togle" class="btn btn-outline-info mb-4" style="margin-top:10px" type="button" name="button">agregar comentario</button>-->
       <!-- Comment with nested comments -->
       {% for comment in comentarios %}
           <div class="comment" style="margin-bottom: 20px">
@@ -122,8 +121,8 @@
     </div>
     <div class="col-md-4">
         <div class="content-section">
-                   <h3>RANDOM BLOG</h3>
-                   <p class='text-muted'>Un poco acerca de mi Blog
+                   <a class="navbar-brand" href="index.html"><span style="color: black">Club de </span><span>Tareas</span></a>
+                     <p>
                      <ul class="list-group">
                        <li class="list-group-item list-group-item-light">numero de posts :23 </li>
                      </ul>

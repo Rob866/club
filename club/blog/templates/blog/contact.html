@@ -1,6 +1,7 @@
 
 {% extends 'app/base.html' %}
 {% load static %}
+{% load crispy_forms_tags%}
 {% block content %}
 
     <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
@@ -52,21 +53,22 @@
         </div>
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-light p-5 contact-form">
+            <form method="POST" class="bg-light p-5 contact-form">
+              {% csrf_token %}
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+                {{ mensaje_form.nombre}}
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                {{mensaje_form.email}}
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
+                {{ mensaje_form.asunto }}
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                {{ mensaje_form.body }}
               </div>
               <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                <input type="submit" value="Enviar Mensaje" class="btn btn-primary py-3 px-5">
               </div>
             </form>
 
