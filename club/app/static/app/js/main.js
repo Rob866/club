@@ -1,5 +1,6 @@
 //funcion que se ejecuta para  cambiar la visibilidad de mi formulario
 // de comentarios del blog
+
 function myFunction() {
   var x = document.getElementById("box");
   if (x.style.display === "none") {
@@ -23,6 +24,7 @@ function myFunction2(formulario,boton) {
   }
 
 }
+
 
  AOS.init({
  	duration: 800,

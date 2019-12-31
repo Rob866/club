@@ -23,7 +23,7 @@ def contact(request):
             mensaje = Mensaje(nombre=request.POST["nombre"],asunto=request.POST["asunto"],email=request.POST["email"],body=request.POST["body"])
             mensaje.save()
             mensaje_form.cleaned_data
-            return HttpResponseRedirect(reverse('blog:contact'))
+        return HttpResponseRedirect(reverse('blog:contact'))
     else:
         mensaje_form = MensajeForm()
         context = {
@@ -34,37 +34,42 @@ def contact(request):
 
 def postDetail(request,id):
     post_object = get_object_or_404(Post,id=id)
-    comentarios = post_object.comentarios.filter(active=True,parent__isnull=True)
+    comentarios = post_object.comentarios.filter(active=True)
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-            parent_object= None
-            try:
-                parent_id = request.POST.get('parent_id')
-            except :
-                parent_id= None
-            if parent_id:
-                parent_object= Comentario.objects.get(id=parent_id)
-                if parent_object:
-                    replay_comment = comment_form.save(commit=False)
-                    replay_comment.parent = parent_object
-            new_comment = comment_form.save(commit=False)
-            new_comment.post = post_object
-            new_comment.save()
-            return HttpResponseRedirect(post_object.get_absolute_url())
+            new_comment = Comentario(post=post_object,nombre=request.POST["nombre"],mensaje=request.POST["mensaje"])
+            new_comment.save();
+            comment_form.cleaned_data
+        return HttpResponseRedirect(post_object.get_absolute_url())
     else:
         comment_form= CommentForm()
-
-    posts = Post.objects.filter(status=1).order_by('-create_on')
-    post = posts.get(id=id)
-    index = list(posts).index(post)
+    #obtengo todos los posts activos
+    posts = Post.objects.filter(status=1)
+    # los ordeno segun el numero de comentarios activos (mayor a menor)
+    order_post_by_comments = sorted(posts,key= lambda post: len(post.comentarios.filter(active=True)),reverse=True)
+    # me  aseguro que las lista de los post mas comentados sea como máximo 5 posts
+    if len(order_post_by_comments) > 5 :
+        order_post_by_comments = order_post_by_comments[:6]
+    # post = posts.get(id=id)
+    # obtengo el index de mi actual post
+    index = list(posts).index(post_object)
+    # hago que el index de mi post actual sea el mismo que el del post anterior
+    # este se mantendra  siempre que sea el post acual el primer post
     post_anterior = posts[index]
-
+    # mi lista es reverse(lo ultimos post se posicionan con menor index que los primeros posts)
+    # si el index del item(post) + 1 es mayor que la longitud de mi lista significa
+    # que es este el primer post(o el ultimo item en la lista o el post con mayor index)
+    # por tanto no hay un post anterior este o un post con mayor index.
+    # Para evitar acceder a un index que  esta fuera del rango
+    # no incremento el index que me enviará al post anterior(ya que esun index que no existe) y
+    # dejo  que sea el mismo index que el primer post.
     if( (index + 1 ) < len(posts)):
         post_anterior = posts[index + 1]
 
     context = {
     'post_anterior': post_anterior,
+    'order_post_by_comments': order_post_by_comments,
     'posts': posts,
     'post': post_object,
     'comentarios': comentarios,

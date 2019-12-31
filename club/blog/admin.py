@@ -6,9 +6,9 @@ class PostAdmin(admin.ModelAdmin):
     search_fields =['titulo','contenido']
 
 class ComentarioAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'body', 'post', 'created_on', 'active')
+    list_display = ('nombre', 'mensaje', 'post', 'created_on', 'active')
     list_filter = ('active', 'created_on')
-    search_fields = ('nombre', 'email', 'body')
+    search_fields = ('nombre',)
     actions = ['desactivar_comentarios']
 
     def desactivar_comentarios(self, request, queryset):

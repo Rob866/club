@@ -12,7 +12,6 @@ class Sesion(models.Model):
     tiempo_de_salida = models.DateTimeField(null=True,blank=True)
     observaciones = models.CharField(max_length=200,null=True,blank=True)
 
-
     def _get_tiempo_de_sesion(self):
         if self.tiempo_de_salida == None:
             return None

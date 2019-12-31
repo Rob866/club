@@ -45,8 +45,8 @@ def paquetes(request,id):
     }
     return render(request,'app/paquetes.html',context)
 
-def clases(request,student_id,paquete_id):
-    student = Alumno.objects.all().get(id=student_id)
+def clases(request,id,paquete_id):
+    student = Alumno.objects.all().get(id=id)
     paquete  = Paquete_Inscrito.objects.all().get(id=paquete_id)
     clases = []
     for clase in paquete.sesiones.all() :

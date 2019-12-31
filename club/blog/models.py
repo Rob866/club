@@ -26,6 +26,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
             return reverse('blog:post_detail', kwargs={'id':self.id})
+
     def __str__(self):
         return self.titulo
 
@@ -34,18 +35,15 @@ class Comentario(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="id del comentario")
     post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comentarios')
     nombre = models.CharField(max_length=80)
-    email = models.EmailField(blank=True)
-    body = models.TextField()
+    mensaje = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
-    parent = models.ForeignKey('self', null=True, on_delete=models.CASCADE,blank=True, related_name='replies')
-
 
     class Meta:
         ordering = ['created_on']
 
     def __str__(self):
-        return 'Comentario de:{}'.format( self.nombre)
+        return 'Comentario de:{}'.format(self.nombre)
 
 class Mensaje(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="id del mensaje")
