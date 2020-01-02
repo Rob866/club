@@ -2,8 +2,7 @@ from django.contrib import admin
 from django.contrib.admin.models import LogEntry,DELETION
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.urls import reverse
-
+from django.urls import reverse,NoReverseMatch
 from .models import Sesion,Paquete_Inscrito,Alumno,Tipo_de_Paquete
 from datetime import timedelta
 from admin_auto_filters.filters import AutocompleteFilter

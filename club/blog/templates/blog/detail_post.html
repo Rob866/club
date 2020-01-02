@@ -6,12 +6,12 @@
 <meta property="og:image"   content="{{ post.imagen.url }}" />
 {% endblock %}
 {% block content %}
-<div class="container fix_padding">
-<div class="row" style="margin-top:100px;padding:0;margin-left:0;margin-right:0">
-  <div class="col-12 col-md-8">
-      <section class="ftco-counter img ftco-section ftco-no-pt ftco-no-p" style="padding-bottom:50px">
+<section class="ftco-counter img ftco-section ftco-no-pt ftco-no-p" style="padding-bottom:50px">
 
-            <article class="media content-section">
+<div class="container ">
+<div class="row" style="margin-top:100px">
+  <div class="col-12 col-md-8">
+  <article class="media content-section">
                     <div class="media-body">
                         <div class="article-metadata">
                             Creado por: <a class="mr-2" href="#">{{ post.autor}}</a>
@@ -32,63 +32,81 @@
                           {% endvideo %}
                        {% endif %}
                     </div>
-              </article>
-               <a class="btn btn-outline-info mb-4" style="margin-top: 10px" href="{% url 'blog:blog' %}">ir a Blog</a>
-      </section>
+  </article>
+  <div class="fb-like" data-href="https://192.168.0.7:8000/blog/{{post.id}}" data-layout="button_count" data-action="like" data-show-faces="true"  data-share="true">
+  </div>
+  <br>
+  <a class="btn btn-outline-info mb-4" style="margin-top: 10px" href="{% url 'blog:blog' %}">ir a Blog</a>
   </div>
   <div class="col-12 col-md-4">
       <div class="content-section">
-                 <p>
-                 <a class="navbar-brand" href="index.html"><span style="color: black">Club de </span><span>Tareas</span></a>
-                   <ul class="list-group">
-                     <li class="list-group-item list-group-item-light">Número de Artículos: {{ posts | length }} </li>
-                   </ul>
-                 </p>
-                   <p class="text-muted">Post anterior :
-                      <ul class="list-group">
-                        <li class="list-group-item list-group-item-light">
-                            <a href="{{ post_anterior.get_absolute_url }}">{{ post_anterior.titulo}}</a>
-                        </li>
-                      </ul>
-                   </p>
+         <div class="row">
 
-                     <p class="text-muted">Post mas comentados :
-                      <ul class="list-group">
-                           {% for post in order_post_by_comments %}
-                           <li class="list-group-item list-group-item-light">
-                               <a href="{{ post.get_absolute_url }}">{{ post.titulo}}</a>
-                           </li>
-                           {% endfor %}
-                      </ul>
-                     </p>
-                     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img class="d-block w-100" src="{% static 'app/images/club1.jpg' %}" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="{% static 'app/images/club.jpeg'%}" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="{% static 'app/images/club2.jpg'%}" alt="Third slide">
-                        </div>
-                      </div>
-                    </div>
+         <div class="col-12">
+           <p>
+           <a class="navbar-brand" href="index.html"><span style="color: black">Club de </span><span>Tareas</span></a>
+             <ul class="list-group">
+               <li class="list-group-item list-group-item-light">Número de Artículos: {{ posts | length }} </li>
+             </ul>
+           </p>
+             <p class="text-muted">Post anterior :
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-light">
+                      <a href="{{ post_anterior.get_absolute_url }}">{{ post_anterior.titulo}}</a>
+                  </li>
+                </ul>
+             </p>
+             <p class="text-muted">Post mas comentados :
+              <ul class="list-group">
+                   {% for post in order_post_by_comments %}
+                   <li class="list-group-item list-group-item-light">
+                       <a href="{{ post.get_absolute_url }}">{{ post.titulo}}</a>
+                   </li>
+                   {% endfor %}
+              </ul>
+             </p>
+
+
+                  </div>
+                  <div class="col-12">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                     <div class="carousel-inner">
+                       <div class="carousel-item active">
+                         <img class="d-block w-100" src="{% static 'app/images/club1.jpg' %}" alt="First slide">
+                       </div>
+                       <div class="carousel-item">
+                         <img class="d-block w-100" src="{% static 'app/images/club.jpeg'%}" alt="Second slide">
+                       </div>
+                       <div class="carousel-item">
+                         <img class="d-block w-100" src="{% static 'app/images/club2.jpg'%}" alt="Third slide">
+                       </div>
+                     </div>
+                   </div>
+
+                  </div>
+                  <div class="col-12" style="margin-top:20px">
+                          <div id="fb-container" style="width:100%">
+                            <div class="fb-page" data-tabs="timeline" data-href="https://www.facebook.com/cloverepublic/" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/cloverepublic/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/cloverepublic/">Clove Republic</a></blockquote></div>
+                          </div>
+                  </div>
+
+                </div>
+
+
 
       </div>
   </div>
 </div>
 </div>
+
 <div class="container">
 
   <div class="row" style="margin:0; padding:0;">
 
     <div class="col-md-12">
-        <div class="fb-like" data-href="https://192.168.0.7:8000/blog/{{post.id}}" data-layout="button_count" data-action="like" data-show-faces="true"  data-share="true">
-        </div>
         <div class="fb-comments" data-href="https://192.168.0.7:8000/blog/{{post.id}}" data-width="500px" data-numposts="5"></div>
         <div class="row" style="padding:0; margin:0">
-            <div class="col-md-10  col-12">
+            <div class="col-12">
             <form method="POST" class="bg-light  contact-form">
               {% csrf_token %}
               <div class="row form-group" >
@@ -126,12 +144,27 @@
 
   </div>
 
-      <!--button id="togle" class="btn btn-outline-info mb-4" style="margin-top:10px" type="button" name="button">agregar comentario</button>
+      <!--<button id="togle" class="btn btn-outline-info mb-4" style="margin-top:10px" type="button" name="button">agregar comentario</button>
       <button id="{{ comment.id }}w" style ="margin-top: 10px" onclick="myFunction2('{{comment.id}}','{{comment.id}}w')" class="btn btn-outline-info mb-4" type="button" name="button">Contestar</button>
-       Comment with nested comments -->
+       Comment with nested comments
+         <button id="togle"  onclick="myFunction()"  class="btn btn-outline-info mb-4" style="margin-top:10px" type="button" name="button">agregar comentario</button>
+     -->
 
     </div>
-  </div>
-
 </div>
+</section>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+       $(window).bind("load resize", function(){
+       setTimeout(function() {
+       var container_width = $('#fb-container').width();
+         $('#fb-container').html('<div class="fb-page" ' +
+         'data-href="https://www.facebook.com/cloverepublic/"' +
+         ' data-width="' + container_width + '" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="http://www.facebook.com/IniciativaAutoMat"><a href="https://www.facebook.com/cloverepublic/">Clove Republic</a></blockquote></div></div>');
+         FB.XFBML.parse( );
+       }, 100);
+     });
+     });
+</script>
+
 {%endblock content%}

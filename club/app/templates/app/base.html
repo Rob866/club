@@ -5,12 +5,13 @@
     <title>Club de tareas</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:url"           content="http://127.0.0.1:8000" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Club de Tareas" />
     <meta property="og:description"   content="Centro de Tutorias para alumnos" />
     {% block meta_tag %}{% endblock%}
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'app/css/open-iconic-bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'app/css/animate.css'%}">
     <link rel="stylesheet" href="{% static 'app/css/search.css'%}">
@@ -21,11 +22,10 @@
     <link rel="stylesheet" href="{% static 'app/css/ionicons.min.css'%}">
     <link rel="stylesheet" href="{% static 'app/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'app/css/icomoon.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'app/css/fix.css' %}">
   </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <body  data-target=".site-navbar-target" data-offset="300">
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.html">Club de <span>Tareas</span></a>
@@ -118,7 +118,7 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+  <div id="fb-root"></div>
   <script src="{% static 'app/js/jquery.min.js' %}"></script>
   <script src="{% static 'app/js/jquery-migrate-3.0.1.min.js' %}"></script>
   <script src="{% static 'app/js/popper.min.js' %}"></script>
@@ -131,9 +131,9 @@
   <script src="{% static 'app/js/aos.js'%}"></script>
   <script src="{% static 'app/js/jquery.animateNumber.min.js' %}"></script>
   <script src="{% static 'app/js/scrollax.min.js' %}"></script>
-  <script src="{% static 'app/js/google-map.js' %}"></script>
+  <!-- <script src="{% static 'app/js/google-map.js' %}"></script> -->
   <script src="{% static 'app/js/main.js' %}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>-->
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v5.0"></script>
 
 

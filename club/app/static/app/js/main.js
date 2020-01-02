@@ -11,20 +11,6 @@ function myFunction() {
     document.getElementById("togle").innerHTML = "Agregar comentario";
   }
 }
-//funcion que se ejecuta para  cambiar la visibilidad de mi formulario
-// de  replicas a comentarios
-function myFunction2(formulario,boton) {
-  var x = document.getElementById(formulario);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-    document.getElementById(boton).innerHTML = "Ocultar formulario";
-  } else {
-    x.style.display = "none";
-    document.getElementById(boton).innerHTML = "Contestar";
-  }
-
-}
-
 
  AOS.init({
  	duration: 800,
