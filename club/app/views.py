@@ -30,18 +30,24 @@ class AlumnosListView(ListView):
     def get_queryset(self):
         if 'busqueda' in self.request.GET:
             query = self.request.GET.get('busqueda')
-            if query:
-                return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query)).order_by('apellido')
+            if not query.strip():
+                return None
+            if len(query) == 5:
+                return Alumno.objects.filter(id__startswith=query)
+                #return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query)).order_by('apellido')
+            return Alumno.objects.filter(id__startswith=" ")
         return  None
 
 def paquetes(request,id):
+
     student = Alumno.objects.all().get(id=id)
     paquetes = []
     for paquete in student.paquete_inscrito_set.all():
         paquetes.append(paquete)
     context = {
     'student' : student,
-    'paquetes': paquetes
+    'paquetes': paquetes,
+    'get_params' : str(id)[0:5]
     }
     return render(request,'app/paquetes.html',context)
 

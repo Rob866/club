@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 import datetime
 from django.contrib.auth.models import  User
+
  # name of the foreign key field
 
 
@@ -58,6 +59,7 @@ class Paquete_Inscrito(models.Model):
      alumno = models.ForeignKey('Alumno',on_delete=models.CASCADE,null=True)
      fecha_de_inscripcion = models.DateField(null=True,blank=True)
      horas_consumidas = models.DurationField(default=datetime.timedelta(days=0,hours=0,minutes=0))
+     horas_restantes = models.DurationField(default=datetime.timedelta(days=0,hours=0,minutes=0))
      ESTADO_STATUS =(
      (True,'Activo'),
      (False,'Finalizado')

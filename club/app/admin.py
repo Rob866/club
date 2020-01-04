@@ -12,9 +12,6 @@ import  import_export
 
 # Register your models here
 
-
-
-
 class SesionAdmin(admin.ModelAdmin):
     list_display =('paquete_inscrito_','tiempo_de_inicio','tiempo_de_salida','tiempo_de_sesion',)
     list_filter = [('paquete_inscrito',admin.RelatedFieldListFilter)]
@@ -40,7 +37,7 @@ class Paquete_inscritoResource(resources.ModelResource):
      class Meta:
          model = Paquete_Inscrito
          report_skipped = True
-         fields = ('alumno__nombre','alumno__apellido','fecha_de_inscripcion','tipo_de_paquete__horas','horas_consumidas','status')
+         fields = ('alumno__nombre','alumno__apellido','fecha_de_inscripcion','tipo_de_paquete__horas','horas_consumidas','horas_restantes','status')
          export_order = fields
 
 
@@ -50,7 +47,7 @@ class SesionesInline(admin.TabularInline):
 
 class Paquete_InscritoAdmin(ImportExportModelAdmin):
     resource_class = Paquete_inscritoResource
-    list_display = ('alumno_name','fecha_de_inscripcion','tipo_de_paquete_','_horas_consumidas','check_status',)
+    list_display = ('alumno_name','fecha_de_inscripcion','tipo_de_paquete_','_horas_consumidas','_horas_restantes','check_status',)
     list_filter=('status',)
     search_fields = ('alumno__nombre','alumno__apellido',)
     inlines = [SesionesInline]
@@ -66,13 +63,14 @@ class Paquete_InscritoAdmin(ImportExportModelAdmin):
     def _horas_consumidas(self,obj):
         return self.calc_hours(obj)
 
+
     def calc_hours(self,obj):
         horas = timedelta(days=0,hours=0,minutes=0)
-        for tiempo in obj.sesiones.all():
-            if tiempo.tiempo_de_sesion == None:
+        for sesion in obj.sesiones.all():
+            if sesion.tiempo_de_sesion == None:
                 return None
             else:
-                horas+= tiempo.tiempo_de_sesion
+                horas+= sesion.tiempo_de_sesion
         obj.horas_consumidas = horas
         obj.save()
         limite = obj.tipo_de_paquete.horas
@@ -82,6 +80,24 @@ class Paquete_InscritoAdmin(ImportExportModelAdmin):
         else:
             obj.status = True
             obj.save()
+        return f'{horas} Horas'
+
+    def _horas_restantes(self,obj):
+        return self.calc_horas_restantes(obj)
+
+    def calc_horas_restantes(self,obj):
+        time_0 = timedelta(days=0,hours=0,minutes=0)
+        get_hours = obj.tipo_de_paquete.horas
+        limite = timedelta(days=0,hours=get_hours,minutes=0)
+        horas_consumidas = obj.horas_consumidas
+        horas = limite - horas_consumidas
+
+        if obj.horas_restantes >= time_0:
+            obj.horas_restantes = horas
+        else:
+            obj.horas_restantes= time_0
+            horas= timedelta(days=0,hours=0,minutes=0)
+        obj.save()
         return f'{horas} Horas'
 
     def alumno_name(self,instance):
