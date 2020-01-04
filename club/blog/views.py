@@ -51,24 +51,8 @@ def postDetail(request,id):
     # me  aseguro que las lista de los post mas comentados sea como máximo 5 posts
     if len(order_post_by_comments) > 5 :
         order_post_by_comments = order_post_by_comments[:6]
-    # post = posts.get(id=id)
-    # obtengo el index de mi actual post
-    index = list(posts).index(post_object)
-    # hago que el index de mi post actual sea el mismo que el del post anterior
-    # este se mantendra  siempre que sea el post acual el primer post
-    post_anterior = posts[index]
-    # mi lista es reverse(lo ultimos post se posicionan con menor index que los primeros posts)
-    # si el index del item(post) + 1 es mayor que la longitud de mi lista significa
-    # que es este el primer post(o el ultimo item en la lista o el post con mayor index)
-    # por tanto no hay un post anterior este o un post con mayor index.
-    # Para evitar acceder a un index que  esta fuera del rango
-    # no incremento el index que me enviará al post anterior(ya que esun index que no existe) y
-    # dejo  que sea el mismo index que el primer post.
-    if( (index + 1 ) < len(posts)):
-        post_anterior = posts[index + 1]
-
+    
     context = {
-    'post_anterior': post_anterior,
     'order_post_by_comments': order_post_by_comments,
     'posts': posts,
     'post': post_object,
