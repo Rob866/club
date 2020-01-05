@@ -92,7 +92,7 @@ class Paquete_InscritoAdmin(ImportExportModelAdmin):
         horas_consumidas = obj.horas_consumidas
         horas = limite - horas_consumidas
 
-        if obj.horas_restantes >= time_0:
+        if horas >= time_0:
             obj.horas_restantes = horas
         else:
             obj.horas_restantes= time_0

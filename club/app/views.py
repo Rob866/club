@@ -35,7 +35,6 @@ class AlumnosListView(ListView):
             if len(query) == 5:
                 return Alumno.objects.filter(id__startswith=query)
                 #return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query)).order_by('apellido')
-            return Alumno.objects.filter(id__startswith=" ")
         return  None
 
 def paquetes(request,id):

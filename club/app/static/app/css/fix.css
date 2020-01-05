@@ -1,8 +1,11 @@
+p.info-alumno{
+  color: white;
+}
+
 .owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item{
     -ms-touch-action: auto;
         touch-action: auto;
 }
-
 
 @media only screen and (max-width: 345px) {
    .navbar-brand{
