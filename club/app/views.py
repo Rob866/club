@@ -24,21 +24,32 @@ def services(request):
 
 
 class AlumnosListView(ListView):
+    model = Alumno
     template_name= 'app/alumnos.html'
-    context_object_name = 'alumnos'
+    #context_object_name = 'alumnos'
 
-    def get_queryset(self):
-        if 'busqueda' in self.request.GET:
-            query = self.request.GET.get('busqueda')
-            if not query.strip():
-                return None
-            if len(query) == 5:
-                return Alumno.objects.filter(id__startswith=query)
-                #return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query)).order_by('apellido')
+    def get_queryset(self,query):
+        if not query.strip():
+            return None
+        if len(query) == 5:
+            return self.model.objects.filter(id__startswith=query)
+            #return Alumno.objects.filter(Q(apellido__icontains=query) | Q(nombre__icontains=query)).order_by('apellido')
         return  None
 
-def paquetes(request,id):
+    def get(self,request,*args,**kwargs):
+        if 'busqueda' in self.request.GET:
+            query = request.GET.get('busqueda')
+            context = {
+            'alumnos': self.get_queryset(query)
+            }
+        else:
+            context = {
+              'alumnos': None
+            }
+        return  render(request,self.template_name,context)
 
+def paquetes(request,id):
+    return_query = str(id)[0:5]
     student = Alumno.objects.all().get(id=id)
     paquetes = []
     for paquete in student.paquete_inscrito_set.all():
@@ -46,7 +57,7 @@ def paquetes(request,id):
     context = {
     'student' : student,
     'paquetes': paquetes,
-    'get_params' : str(id)[0:5]
+    'return_query' : return_query
     }
     return render(request,'app/paquetes.html',context)
 

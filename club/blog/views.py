@@ -8,12 +8,14 @@ from django.views.generic import (ListView)
 from django.urls import reverse
 
 class blog(ListView):
+    model= Post
     template_name= 'blog/blog.html'
     context_object_name='posts'
     paginate_by= 3
 
     def get_queryset(self):
-        return Post.objects.filter(status=1).order_by('-create_on')
+        return self.model.objects.filter(status=1).order_by('-create_on')
+        #return Post.objects.filter(status=1).order_by('-create_on')
 
 def contact(request):
 
@@ -51,7 +53,7 @@ def postDetail(request,id):
     # me  aseguro que las lista de los post mas comentados sea como máximo 5 posts
     if len(order_post_by_comments) > 5 :
         order_post_by_comments = order_post_by_comments[:6]
-    
+
     context = {
     'order_post_by_comments': order_post_by_comments,
     'posts': posts,
