@@ -39,8 +39,9 @@ class Tipo_de_Paquete(models.Model):
 
 
 
-class Alumno(models.Model):
+class AlumnoProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="id del Alumno")
+    #k_user = models.OneToOneField(User,on_delete=models.CASCADE)
     nombre =  models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     NIVEL_STATUS = (
@@ -51,13 +52,18 @@ class Alumno(models.Model):
          ('u','universidad'))
     nivel_academico = models.CharField(max_length=1,choices=NIVEL_STATUS,blank=True,help_text='Elige el nivel académico del alumno')
 
+    class Meta:
+        verbose_name = ("Perfil del Alumno")
+        verbose_name_plural = ("Perfiles de los Alumnos")
+        
     def __str__(self):
         return f'{self.nombre} { self.apellido}'
+
 
 class Paquete_Inscrito(models.Model):
      id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="id del Paquete")
      #related_name='_clases_concluidas'
-     alumno = models.ForeignKey('Alumno',on_delete=models.CASCADE,null=True)
+     alumno = models.ForeignKey('AlumnoProfile',on_delete=models.CASCADE,null=True)
      fecha_de_inscripcion = models.DateField(null=True,blank=True)
      horas_consumidas = models.DurationField(default=datetime.timedelta(days=0,hours=0,minutes=0))
      horas_restantes = models.DurationField(default=datetime.timedelta(days=0,hours=0,minutes=0))

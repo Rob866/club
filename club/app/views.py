@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import  Alumno
+from .models import  AlumnoProfile
 from .models import Paquete_Inscrito
 from django.db.models import Q
 from django.templatetags.static import static
@@ -24,7 +24,7 @@ def services(request):
 
 
 class AlumnosListView(ListView):
-    model = Alumno
+    model = AlumnoProfile
     template_name= 'app/alumnos.html'
     #context_object_name = 'alumnos'
 

@@ -3,7 +3,7 @@ from django.contrib.admin.models import LogEntry,DELETION
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.urls import reverse,NoReverseMatch
-from .models import Sesion,Paquete_Inscrito,Alumno,Tipo_de_Paquete
+from .models import Sesion,Paquete_Inscrito,AlumnoProfile,Tipo_de_Paquete
 from datetime import timedelta
 from admin_auto_filters.filters import AutocompleteFilter
 from import_export.admin import ImportExportModelAdmin
@@ -25,7 +25,7 @@ class PaquetesInscritosInline(admin.TabularInline):
     model = Paquete_Inscrito
     extra=0
 
-class AlumnoAdmin(admin.ModelAdmin):
+class AlumnoProfileAdmin(admin.ModelAdmin):
     list_display = ('apellido','nombre','nivel_academico',)
     list_filter = ('nombre','apellido')
     search_fields=('nombre', 'apellido',)
@@ -144,7 +144,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         return super(LogEntryAdmin, self).queryset(request) \
             .prefetch_related('content_type')
 '''
-admin.site.register(Alumno,AlumnoAdmin)
+admin.site.register(AlumnoProfile,AlumnoProfileAdmin)
 admin.site.register(Sesion,SesionAdmin)
 admin.site.register(Paquete_Inscrito,Paquete_InscritoAdmin)
 admin.site.register(Tipo_de_Paquete)
